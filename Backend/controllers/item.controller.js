@@ -1,17 +1,19 @@
 import Item from  '../models/Item.model.js'
-import cloudinary, { uploadOnCloudinary } from '../utils/cloudinary.js'
+import  { uploadOnCloudinary } from '../utils/cloudinary.js'
 
 
 //Item creation logic for the Admin
 const createitem = async(req ,res)=>{
     const {title ,description ,stock , price , category } = req.body;
     const imageurl = req.file?.path;
+    // console.log(req.body);
     try {
         if(!title || !price || !category){
             return res.status(400).json({message:"Invalid item data"})
         }
+        // console.log(title , price  , category);
         const result = await uploadOnCloudinary(imageurl);
-        console.log(result);
+        // console.log(result);
         const item = new Item({
             title ,
             description,
@@ -90,9 +92,27 @@ const updateitem = async(req,res)=>{
     }
  }
 
+ const getAllItems = async (req, res) => {
+  try {
+    const items = await Item.find(); // fetch everything
+    res.status(200).json({
+      success: true,
+      count: items.length,
+      items
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch items",
+      error: error.message
+    });
+  }
+};
+
 export {
     createitem,
     deleteitem,
     updateitem,
-    filteritem
+    filteritem,
+    getAllItems
 }

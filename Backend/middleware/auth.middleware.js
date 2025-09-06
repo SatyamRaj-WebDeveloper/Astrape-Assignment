@@ -8,7 +8,9 @@ const verifyjwt =async(req,res,next)=>{
         res.status(401).json({message :"No Token Found"});
      }
      const decodedToken = jwt.verify(token , process.env.JWT_SECRET);
-      const user = await User.findById(decodedToken?._id).select('-Password')
+     console.log(decodedToken);
+      const user = await User.findById(decodedToken?.id).select('-Password')
+      console.log(user);
         if(!user){
             return res.status(401).json({message:"Token Not Verified"})
         }
