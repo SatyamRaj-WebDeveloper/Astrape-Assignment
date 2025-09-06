@@ -21,12 +21,21 @@ const userSchema = new Schema ({
         type : String ,
         required : true,
     },
-    password :{
+    Password :{
         type : String ,
         required : true,
+        unique : true
+    },
+    role:{
+      type : String,
+      enum : ["customer" , "admin"],
+      default :"customer"
     },
     cart : [cartItemSchema],
 },{timestamps:true})
+
+
+
 
 
 export default mongoose.model('User', userSchema);
