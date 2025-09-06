@@ -9,10 +9,18 @@ const itemSchema = new Schema({
    description :{
     type : String,
    },
-   Price :{
+   price :{
     type : Number,
     required :true,
     min :0
+   },
+   stock :{
+      type: Number,
+       default: 0
+   },
+   category :{
+      type: String,
+       required: true 
    },
    imageurl :{type : String }
 },{timestamps:true})

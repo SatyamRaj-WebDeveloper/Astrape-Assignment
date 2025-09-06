@@ -12,8 +12,9 @@ dbConnect()
 
 
 import userroutes from './routes/User.routes.js'
-
+import itemroutes from './routes/item.routes.js';
 app.use('/api/v1' , userroutes);
+app.use('/api/v1' , itemroutes);
 
 app.listen(PORT ,()=>{
    console.log( `Sample app is Listening on Port ${PORT}`);
