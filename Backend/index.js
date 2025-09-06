@@ -4,12 +4,16 @@ import dbConnect from './DB/dbConnect.js';
 dotenv.config();
 const app =express();
 
+app.use(express.json());
 
 const PORT  = process.env.PORT ;
 
 dbConnect()
 
 
+import userroutes from './routes/User.routes.js'
+
+app.use('/api/v1' , userroutes);
 
 app.listen(PORT ,()=>{
    console.log( `Sample app is Listening on Port ${PORT}`);

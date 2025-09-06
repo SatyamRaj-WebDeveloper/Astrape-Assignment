@@ -1,14 +1,14 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/User.model.js';
+import bcrypt from 'bcrypt';
 // import verifyjwt from  '../middleware/auth.middleware.js'
 
 
 
 const signUp = async(req , res)=>{
-    const {email,password,username, role} = req.body;
-
+    const {email,password,username} = req.body;
    try {
-     if(!email || !password || !username || !role){
+     if(!email || !password || !username  ){
         return res.status(400).json({message:"Invalid Data Entered"});
     }
     const existingUser = await User.findOne({email});
@@ -16,20 +16,19 @@ const signUp = async(req , res)=>{
         return res.status(400).json({message:"user already exists" , data : existingUser});
     }
     const hashedPassword = await bcrypt.hash(password,10);
-
-    const user = new User({
-        username : username,
+    const user =  new User({
+        name: username,
         email : email,
         Password : hashedPassword,
-        role : role
     })
+    console.log("user from register user function ::  ", user)
     await user.save();
     if(!user){
         console.log("Register User :: User Not Created");
     }
     return res.status(201).json({message:"User Created Successfully"});
    } catch (error) {
-      return res.status(400).json({message :" Error in RegisterUser function", error})
+      return res.status(400).json({message :" Error in RegisterUser function", error : error.message})
    }
 }
 

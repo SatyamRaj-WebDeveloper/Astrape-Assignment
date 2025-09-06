@@ -13,7 +13,7 @@ const cartItemSchema = new Schema({
 });
 
 const userSchema = new Schema ({
-    name  : {
+    name: {
         type :String,
         required : true
     },
