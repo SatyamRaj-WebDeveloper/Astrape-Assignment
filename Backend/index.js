@@ -12,7 +12,7 @@ const PORT  = process.env.PORT ;
 dbConnect()
 
 app.use(cors({
-  origin: process.env.FRONTEND_URL, // Next.js runs on 3000
+  origin: "http://localhost:3000", // Next.js runs on 3000
   credentials: true
 }));
 
