@@ -1,3 +1,4 @@
+"use client"
 import FilterSidebar from "../components/FilterSidebar";
 
 export default function AdminPage() {
