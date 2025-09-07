@@ -12,7 +12,10 @@ const PORT  = process.env.PORT ;
 dbConnect()
 
 app.use(cors({
-  origin: "http://localhost:3000", // Next.js runs on 3000
+  origin: [
+  "http://localhost:3000",
+  "https://astrape-assignment-seven.vercel.app"
+], 
   credentials: true
 }));
 
