@@ -1,6 +1,6 @@
 "use client"
 import FilterSidebar from "../components/FilterSidebar";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 export default function AdminPage() {
   const [items, setItems] = useState([]);
