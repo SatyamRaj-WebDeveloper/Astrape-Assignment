@@ -11,7 +11,7 @@ export default function CartPage() {
   typeof window !== "undefined" ? localStorage.getItem("token") : null;
   
 
-  const API_BASE = "http://localhost:8080/api/v1/cart";
+  const API_BASE = "https://astrape-assignment.onrender.com/api/v1/cart";
 
   const safeJson = async (res) => {
     const ct = res.headers.get("content-type") || "";
@@ -24,7 +24,7 @@ export default function CartPage() {
   };
   const fetchCart = async () => {
   try {
-    const res = await fetch(`http://localhost:8080/api/v1/cart/get`, {
+    const res = await fetch(`https://astrape-assignment.onrender.com/api/v1/cart/get`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await safeJson(res);

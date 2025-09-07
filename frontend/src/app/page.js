@@ -9,7 +9,7 @@ export default function HomePage() {
   // fetch all items initially
   const fetchAllProducts = async () => {
     try {
-      const res = await fetch("http://localhost:8080/api/v1/item/getAll");
+      const res = await fetch("https://astrape-assignment.onrender.com/api/v1/item/getAll");
       const data = await res.json();
       setProducts(data.items || []);
     } catch (err) {
@@ -26,7 +26,7 @@ export default function HomePage() {
         return;
       }
 
-      let url = "http://localhost:8080/api/v1/item/filter";
+      let url = "https://astrape-assignment.onrender.com/api/v1/item/filter";
       const params = new URLSearchParams(filters);
       if (params.toString()) url += `?${params.toString()}`;
 

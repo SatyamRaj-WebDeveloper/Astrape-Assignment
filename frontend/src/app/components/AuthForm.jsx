@@ -16,10 +16,10 @@ export default function AuthForm({ type }) {
     setError("");
 
     const url =
-      type === "login" ? "/api/v1/login/user" : "/api/v1/register/user";
+      type === "login" ? "/login/user" : "/register/user";
 
     try {
-      const res = await fetch(`http://localhost:8080${url}`, {
+      const res = await fetch(`https://astrape-assignment.onrender.com/api/v1/${url}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
