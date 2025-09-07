@@ -6,7 +6,7 @@ export default function AuthForm({ type }) {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    username: "", // used only for register
+    name: "", // ✅ use "name", not "username"
   });
   const [error, setError] = useState("");
   const router = useRouter();
@@ -25,7 +25,6 @@ export default function AuthForm({ type }) {
         body: JSON.stringify(formData),
       });
 
-      // Safe JSON parsing
       let data;
       try {
         data = await res.json();
@@ -33,29 +32,32 @@ export default function AuthForm({ type }) {
         setError("Invalid server response");
         return;
       }
-      // console.log("Role : ",data.data.user.role)
+
       if (!res.ok) {
         setError(data.message || "Something went wrong");
         return;
       }
 
       if (type === "login") {
-        // Login successful
-        localStorage.setItem("token", data.token);
+        // ✅ Login successful
+        localStorage.setItem("token", data.data.token);
         localStorage.setItem("role", data.data.user.role);
 
-        // Redirect based on role
+        // Trigger re-render for Navbar (storage event)
+        window.dispatchEvent(new Event("storage"));
+
+        // ✅ Redirect based on role
         if (data.data.user.role === "admin") {
           router.push("/admin");
         } else {
-          router.push("/"); // Home page
+          router.push("/");
         }
       } else {
-        // Register successful, redirect to login
+        // ✅ Register successful → redirect to login
+        alert("Registration successful! Please login.");
         router.push("/login");
       }
     } catch (err) {
-      // Only real network errors
       setError("Network error. Try again.");
       console.error("AuthForm error:", err);
     }
