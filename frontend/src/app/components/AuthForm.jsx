@@ -16,7 +16,7 @@ export default function AuthForm({ type }) {
     setError("");
 
     const url =
-      type === "login" ? "/login/user" : "/register/user";
+      type === "login" ? "login/user" : "register/user";
 
     try {
       const res = await fetch(`https://astrape-assignment.onrender.com/api/v1/${url}`, {
